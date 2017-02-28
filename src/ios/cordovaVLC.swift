@@ -9,6 +9,7 @@
         let msg = command.arguments[0] as? String ?? ""
         
         let secondViewController:ViewController = ViewController()
+        secondViewController.urlValue = msg
         
         self.viewController?.present(secondViewController, animated: true, completion: nil)
         

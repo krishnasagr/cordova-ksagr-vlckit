@@ -17,9 +17,12 @@ class ViewController: UIViewController, VLCMediaPlayerDelegate {
     var mediaPlayer = VLCMediaPlayer()
     var volumeview = MPVolumeView()
     var button:UIButton!
+    var urlValue:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
         
         //Add rotation observer
         NotificationCenter.default.addObserver(self, selector: #selector(ViewController.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
@@ -54,6 +57,8 @@ class ViewController: UIViewController, VLCMediaPlayerDelegate {
             self.movieView.removeFromSuperview()
             self.movieView = nil
             })
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
         
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -62,7 +67,10 @@ class ViewController: UIViewController, VLCMediaPlayerDelegate {
         //let url = NSURL(string: "udp://@225.0.0.1:51018")
         
         //Playing HTTP from internet
-        let url = NSURL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        //        let url = NSURL(string: "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4")
+        
+        let url = NSURL(string:self.urlValue)
+        
         //        let url = NSURL(string: "http://admin:Abc@12345@192.168.1.66/video/mjpg.cgi")
         
         //Playing RTSP from internet
@@ -70,11 +78,14 @@ class ViewController: UIViewController, VLCMediaPlayerDelegate {
         
         
         let media = VLCMedia(url: url as URL!)
+        
         mediaPlayer.media = media
+        print(self.urlValue)
         
         
         mediaPlayer.delegate = self
         mediaPlayer.drawable = self.movieView
+        mediaPlayer.play()
         
         
         
@@ -97,6 +108,7 @@ class ViewController: UIViewController, VLCMediaPlayerDelegate {
         
         //Always fill entire screen
         self.movieView.frame = self.view.frame
+        
         
     }
     

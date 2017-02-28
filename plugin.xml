@@ -1,16 +1,18 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="cordovaVLC-plugin" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-  <name>ModusEchoSwift</name>
+  <name>cordovaVLC</name>
   <js-module name="cordovaVLC" src="www/cordovaVLC.js">
-    <clobbers target="modusechoswift" />
+    <clobbers target="cordovaVLC" />
   </js-module>
   <platform name="ios">
+      <framework src="libbz2.dylib" ></framework>
+      <framework src="libiconv.dylib" ></framework>
     <config-file target="config.xml" parent="/*">
       <feature name="cordovaVLC">
         <param name="ios-package" value="cordovaVLC" />
       </feature>
     </config-file>
-    <source-file src="src/ios/ModusEchoSwift.swift" />
+    <source-file src="src/ios/cordovaVLC.swift" />
     <source-file src="src/ios/file.swift" />
   </platform>
 </plugin>
